@@ -4,7 +4,11 @@
     "dependencies": {
         "koa": "*",
         "koa-static": "*",
-        "socket.io": "*"
+        "koa-browserify": "*",
+        "socket.io": "*",
+
+        "web-peer": "*",
+        "socket.io-client": "*"
     },
     "scripts": {
         "start": "node --harmony index.js"
