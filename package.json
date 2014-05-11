@@ -9,7 +9,8 @@
         "socket.io": "*",
 
         "web-peer": "*",
-        "socket.io-client": "*"
+        "socket.io-client": "*",
+        "react": "*"
     },
     "scripts": {
         "start": "node --harmony app.js"

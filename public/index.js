@@ -1,4 +1,6 @@
 var socket = require('socket.io-client').connect(window.location.host),
+    React = require('react'),
+    DragForm = require('./drag-form'),
     Peer = require('web-peer'),
     peer = new Peer();
 
@@ -6,7 +8,17 @@ peer.on('error', console.error.bind(console));
 peer.on('sync', socket.emit.bind(socket, 'sync'));
 socket.on('sync', peer.sync.bind(peer));
 
+var App = React.createClass({
+    render: function () {
+        return  DragForm(null);
+    }
+});
+
+
 window.addEventListener('load', function () {
+    React.renderComponent(App(null), document.querySelector('.app'));
+    
+    /*
 	var input = document.querySelector('input'),
 		progress = document.querySelector('progress'),
 		file;
@@ -31,6 +43,7 @@ window.addEventListener('load', function () {
 		});
 		console.log(file);
 	});
+    */
 	
 	// peer.on('data', console.log.bind(console));
 }, false);

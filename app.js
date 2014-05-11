@@ -12,7 +12,7 @@ app.use(stat('./public'));
 app.use(router(app));
 app.get('/', function *() {
 	this.type = 'text/html';
-	this.body = require('fs').createReadStream('./public/view.html');
+	this.body = require('fs').createReadStream('./public/index.html');
 });
 app.get('/:fileId', function *(next) {
 	this.type = 'text/html';

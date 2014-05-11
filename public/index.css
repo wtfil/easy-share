@@ -1,0 +1,76 @@
+body
+{
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+.app .dragzone
+{
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+}
+
+.dragzone
+{
+    border: 2px dashed #ccc;
+    cursor: pointer;
+    transition: border 150ms linear;
+    text-align: center;
+    width: 50%;
+    height: 80px;
+}
+
+.dragzone:hover
+{
+    border-color: #666;
+}
+
+.dragzone__title
+{
+    font-weight: normal;
+    margin-bottom: 0;
+}
+.dragzone__description
+{
+    font-size: 13px;
+}
+
+.dragzone__file
+{
+    visibility: hidden;
+    display: block;
+}
+
+.dragzone ul
+{
+    list-style: none;
+    padding: 0;
+    margin: 4px -2px;
+    text-align: left;
+}
+.dragzone li
+{
+    line-height: 42px;
+}
+.dragzone li:hover
+{
+    background: #ffebae;
+}
+.dragzone li+li
+{
+    border-top: 1px solid #ccc;
+}
+.dragzone__size
+{
+    float: right;
+}
+
+.dragzone__name
+{
+    max-width: 75%;
+    float: left;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
