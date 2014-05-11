@@ -14,9 +14,9 @@ app.get('/', function *() {
 	this.type = 'text/html';
 	this.body = require('fs').createReadStream('./public/index.html');
 });
-app.get('/:fileId', function *(next) {
+app.get('/:fileId', function *() {
 	this.type = 'text/html';
-	this.body = require('fs').createReadStream('./public/view.html');
+	this.body = require('fs').createReadStream('./public/index.html');
 });
 
 
@@ -26,7 +26,7 @@ io = io.listen(server);
 io.on('connection', function (socket) {
 	socket.on('sync', function (data) {
 		socket.broadcast.emit('sync', data);
-	})
+	});
 });
 
 server.listen(3000);
