@@ -36,9 +36,11 @@ window.addEventListener('load', function () {
         sendFileNames();
     });
 
+    // send file
     model.on('active', function (name) {
         peer.send('get file', name);
     });
+    // recieve file
     peer.messages.on('get file', function (name) {
         var files = model.get().files,
             file = files.filter(function (file) {
@@ -55,6 +57,7 @@ window.addEventListener('load', function () {
         });
     });
 
+    // ask and recieve remote file names
     peer.send('get file names');
     peer.messages.on('get file names', sendFileNames);
     peer.messages.on('ready to load', function (files) {
