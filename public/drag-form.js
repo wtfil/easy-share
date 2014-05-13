@@ -50,11 +50,9 @@ module.exports = React.createClass({
             this.state.remote && [
                 DOM.h4({className: 'dragzone__shared-files-title'}, 'shared files:'),
                 DOM.ul(null, this.state.remote.map(function (file) {
-                    return DOM.li(null, 
-                        DOM.a({onClick: _this._download, href: createFileUrl(file), download: file.name},
-                            DOM.span({className: 'dragzone__name'}, file.name),
-                            DOM.span({className: 'dragzone__size'}, getFileSize(file.size))
-                        )
+                    return DOM.a({onClick: _this._download, href: createFileUrl(file), download: file.name},
+                        DOM.span({className: 'dragzone__name'}, file.name),
+                        DOM.span({className: 'dragzone__size'}, getFileSize(file.size))
                     );
                 }))
             ]
@@ -66,7 +64,6 @@ module.exports = React.createClass({
     },
 
     _download: function () {
-        //TODO
         this.model.set('active', this.model.get().remote[0].name);
     },
 
