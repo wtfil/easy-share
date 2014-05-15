@@ -1,13 +1,7 @@
-var socket = require('socket.io-client').connect(window.location.host),
-    React = require('react'),
+var React = require('react'),
     Model = require('./model'),
     DragForm = require('./drag-form'),
-    Peer = require('web-peer'),
-    peer = new Peer();
-
-peer.on('error', console.error.bind(console));
-peer.on('sync', socket.emit.bind(socket, 'sync'));
-socket.on('sync', peer.sync.bind(peer));
+    peer = require('./peer-connection')();
 
 
 var App = React.createClass({
@@ -29,6 +23,7 @@ window.addEventListener('load', function () {
     }
 
     React.renderComponent(App({model: model}), document.querySelector('.app'));
+
     model.on('files', function () {
 		if (location.pathname === '/') {
 			history.replaceState(null, null, Math.random());
@@ -37,7 +32,7 @@ window.addEventListener('load', function () {
     });
 
     // send file
-    model.on('active', function (name) {
+    model.on('current-file', function (name) {
         peer.send('get file', name);
     });
     // recieve file
@@ -49,12 +44,13 @@ window.addEventListener('load', function () {
         peer.sendFile(file);
     });
     peer.on('file', function (file) {
+        /*model.set('state', 'load');*/
         file.on('progress', function (progress) {
             model.set('progress', progress);
         });
-        file.on('load', function () {
-
-        });
+        /*file.on('load', function () {*/
+            /*model.set('state', 'done');*/
+    /*});*/
     });
 
     // ask and recieve remote file names

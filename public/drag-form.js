@@ -1,4 +1,5 @@
 var React = require('react'),
+    DownloadableItem = require('./downloadable-item'),
     ReactModelMixin = require('./model').ReactModelMixin,
     DOM = React.DOM;
 
@@ -15,12 +16,6 @@ function getFileSize(size) {
     if (size < 1e12) {
         return (size / 1e9).toFixed(1) + ' Gb';
     }
-}
-
-function createFileUrl(file) {
-    /*global escape*/
-    // TODO get from web-peer
-    return 'filesystem:http://' + location.host + '/temporary/' + escape(file.name);
 }
 
 module.exports = React.createClass({
@@ -48,12 +43,9 @@ module.exports = React.createClass({
             })),
 
             this.state.remote && [
-                DOM.h4({className: 'dragzone__shared-files-title'}, 'shared files:'),
+                /*DOM.h4({className: 'dragzone__shared-files-title'}, 'shared files:'),*/
                 DOM.ul(null, this.state.remote.map(function (file) {
-                    return DOM.a({onClick: _this._download, href: createFileUrl(file), download: file.name},
-                        DOM.span({className: 'dragzone__name'}, file.name),
-                        DOM.span({className: 'dragzone__size'}, getFileSize(file.size))
-                    );
+                    return DownloadableItem({file: file, model: _this.model});
                 }))
             ]
         );
@@ -61,10 +53,6 @@ module.exports = React.createClass({
 
     componentDidMount: function () {
         this._input = this.getDOMNode().querySelector('input');
-    },
-
-    _download: function () {
-        this.model.set('active', this.model.get().remote[0].name);
     },
 
     _onFile: function () {
