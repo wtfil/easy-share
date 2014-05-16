@@ -99,6 +99,7 @@ body
 .item__name
 {
     padding: 0 5px;
+    cursor: pointer;
 }
 
 .item__progress
